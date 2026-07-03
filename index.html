@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEVET | Official Designer House</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #FDFBF7; color: #1C1917; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Global Persistent Storage Cart Controller Engine -->
+    <script>
+        const ELEVET_CART = {
+            get() { return JSON.parse(localStorage.getItem('elevet_cart')) || []; },
+            save(cart) {
+                localStorage.setItem('elevet_cart', JSON.stringify(cart));
+                this.updateBadge();
+            },
+            add(id, name, price, img, color = "Standard", size = "M") {
+                let cart = this.get();
+                let existing = cart.find(item => item.id === id && item.color === color && item.size === size);
+                if (existing) { existing.qty += 1; } else { cart.push({ id, name, price, img, color, size, qty: 1 }); }
+                this.save(cart);
+                alert(`Added to Bag: ${name}\nColorway: ${color}\nOutline: Size ${size}`);
+            },
+            updateBadge() {
+                const badge = document.getElementById('cart-count');
+                if (badge) {
+                    const total = this.get().reduce((sum, item) => sum + item.qty, 0);
+                    badge.innerText = total;
+                    badge.style.display = total > 0 ? 'flex' : 'none';
+                }
+            }
+        };
+        document.addEventListener("DOMContentLoaded", () => ELEVET_CART.updateBadge());
+    </script>
+
+    <!-- Top Architecture Banner -->
+    <div class="bg-stone-900 text-white text-[10px] uppercase tracking-[0.25em] text-center py-2.5 font-medium px-4">
+        Complimentary Eco-Priority Worldwide Logistics On All Orders
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="bg-white/90 backdrop-blur-md border-b border-stone-100 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <!-- Brand Logo Mark -->
+            <a href="index.html" class="text-2xl font-light tracking-[0.3em] uppercase">ELE<span class="font-medium">VET</span></a>
+            
+            <!-- Restored Full Store Page Routing System Links -->
+            <div class="hidden lg:flex space-x-10 text-xs tracking-widest uppercase font-medium text-stone-600">
+                <a href="collections.html" class="hover:text-stone-950 transition">Collections</a>
+                <a href="sale.html" class="text-rose-600 font-semibold hover:text-rose-700 transition">Summer Sale</a>
+                <a href="upcoming.html" class="hover:text-stone-950 transition">Upcoming Drops</a>
+                <a href="personalize.html" class="hover:text-stone-950 transition">Personalize</a>
+                <a href="about.html" class="hover:text-stone-950 transition">About House</a>
+            </div>
+
+            <!-- Cart Hub Badge Interface Entry Point -->
+            <div class="flex items-center space-x-6">
+                <a href="cart.html" class="relative text-stone-700 hover:text-stone-950 transition flex items-center p-2">
+                    <i class="fa-solid fa-bag-shopping text-xl"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 bg-stone-900 text-white font-mono text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-pulse" style="display: none;">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Workspace -->
+    <main class="flex-grow max-w-7xl mx-auto px-6 py-12 w-full">
+        <!-- Sub-Header Status Metrics Line -->
+        <div class="flex flex-col md:flex-row md:justify-between md:items-end border-b border-stone-200 pb-6 mb-10 gap-4">
+            <div>
+                <span class="text-[9px] font-mono uppercase tracking-widest text-stone-400">Archival Manifest // 2026 Volume</span>
+                <h1 class="text-3xl font-light tracking-wide uppercase text-stone-900 mt-1">The Complete Ready-To-Wear Lookbook</h1>
+                <p class="text-xs text-stone-400 mt-1">Explore our continuous procedural collection line. Select any look model profile directly to reveal colorway swatches and configure sizing variables.</p>
+            </div>
+            <div class="text-xs font-mono text-stone-500 bg-stone-100/80 px-4 py-2 border rounded-xl shadow-inner h-fit self-start md:self-auto">
+                System Grid Cache: <span id="product-count" class="font-bold text-stone-900">100</span> Concepts Online
+            </div>
+        </div>
+
+        <!-- Master Product Grid Layout Frame -->
+        <div id="master-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
+            <!-- Programmatic Script loops populate content modules cleanly right here -->
+        </div>
+    </main>
+
+    <!-- Immersive Atelier Lookbook Modal Window Overlay Component -->
+    <div id="product-modal" class="fixed inset-0 bg-stone-950/50 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl grid grid-cols-1 md:grid-cols-2 transform scale-95 transition-transform duration-300 relative max-h-[90vh] md:max-h-none overflow-y-auto md:overflow-visible">
+            
+            <!-- Close Modal Trigger Button -->
+            <button onclick="closeModal()" class="absolute top-5 right-5 z-10 w-9 h-9 rounded-full bg-white/90 backdrop-blur border border-stone-200 text-stone-700 hover:text-black flex items-center justify-center shadow-md transition transform hover:scale-105 active:scale-95">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <!-- Left Grid Pane: Lookbook Image Studio Showcase -->
+            <div class="bg-stone-50 p-6 flex flex-col justify-center items-center border-b md:border-b-0 md:border-r border-stone-100">
+                <div class="w-full aspect-[3/4] rounded-2xl overflow-hidden bg-white shadow-sm border border-stone-200/40 mb-4">
+                    <img id="modal-main-img" src="" class="w-full h-full object-cover transition-all duration-300">
+                </div>
+                <!-- Mini Angle Track Swiper Bar Container -->
+                <div id="modal-gallery-track" class="flex space-x-2.5 w-full overflow-x-auto py-1 no-scrollbar justify-start"></div>
+            </div>
+
+            <!-- Right Grid Pane: Garment Controls & Information Matrix -->
+            <div class="p-8 flex flex-col justify-between h-full bg-white">
+                <div>
+                    <span id="modal-collection-tag" class="text-[9px] font-mono uppercase tracking-widest text-stone-400 block mb-1"></span>
+                    <h2 id="modal-title" class="text-xl font-light uppercase tracking-wide text-stone-900 mb-2"></h2>
+                    <p id="modal-price" class="text-sm font-bold font-mono text-stone-950 bg-stone-50 border w-fit px-3 py-1 rounded-lg"></p>
+                    
+                    <hr class="border-stone-100 my-5">
+                    
+                    <p id="modal-desc" class="text-xs text-stone-500 font-light leading-relaxed mb-6"></p>
+
+                    <!-- Colorway Palette Swatch Field Map -->
+                    <div class="mb-6">
+                        <label class="block text-[10px] font-mono uppercase tracking-widest text-stone-400 mb-2">Color Matrix Selection</label>
+                        <div id="modal-color-swatches" class="flex space-x-3.5"></div>
+                        <span id="modal-selected-color-label" class="block text-[10px] text-stone-400 mt-2 font-mono italic"></span>
+                    </div>
+
+                    <!-- Size Sizing Block Layout Handles -->
+                    <div class="mb-6">
+                        <label class="block text-[10px] font-mono uppercase tracking-widest text-stone-400 mb-2">Garment Dimension Frame</label>
+                        <div class="grid grid-cols-4 gap-2 text-center" id="modal-size-grid">
+                            <button onclick="setSize('S')" id="size-S" class="border py-2.5 rounded-xl uppercase text-xs font-mono transition bg-white text-stone-800 hover:border-stone-400">S</button>
+                            <button onclick="setSize('M')" id="size-M" class="border py-2.5 rounded-xl uppercase text-xs font-mono transition bg-stone-950 text-white font-bold border-stone-950">M</button>
+                            <button onclick="setSize('L')" id="size-L" class="border py-2.5 rounded-xl uppercase text-xs font-mono transition bg-white text-stone-800 hover:border-stone-400">L</button>
+                            <button onclick="setSize('XL')" id="size-XL" class="border py-2.5 rounded-xl uppercase text-xs font-mono transition bg-white text-stone-800 hover:border-stone-400">XL</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bag Integration Action Dispatcher -->
+                <button id="modal-submit-btn" class="w-full bg-stone-900 text-white text-xs uppercase tracking-widest font-bold py-4 rounded-xl shadow-lg hover:bg-stone-800 transition transform active:scale-[0.99] mt-6">
+                    Commit Selection to Shopping Bag
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Master Footer -->
+    <footer class="bg-stone-900 text-stone-300 pt-16 pb-12 border-t border-stone-800 mt-20">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-xs">
+            <div>
+                <h3 class="text-white uppercase tracking-[0.3em] font-bold mb-4">ELE<span class="font-medium">VET</span></h3>
+                <p class="text-stone-400 font-light leading-relaxed">Continuous procedural garment matrices engineered for fluid architectural identity frameworks globally.</p>
+            </div>
+            <div>
+                <h3 class="text-white uppercase tracking-widest font-bold mb-4">House Coordinates</h3>
+                <p class="text-stone-400 font-light leading-relaxed">Keizersgracht 421, Amsterdam, NL<br>Studio Line: +31 (0) 20 555 7890<br>Inquiries: studio@elevet.com</p>
+            </div>
+            <div>
+                <h3 class="text-white uppercase tracking-widest font-bold mb-4">Connected Node</h3>
+                <div class="flex space-x-5 text-xl text-stone-400 mt-2">
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Comprehensive 100-Item Architectural Generator Database Script -->
+    <script>
+        const CLOTHING_CATEGORIES = ["Tailored Jacket", "Raw Hem Shirt", "Premium Eyewear", "Minimalist Footwear", "Ribbed Knit"];
+        const COLOR_PALETTES = [
+            { name: "Charcoal Obsidian", hex: "#1C1917", primaryImg: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80", alternateImg: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" },
+            { name: "Desert Sand Camel", hex: "#C5A059", primaryImg: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=600&q=80", alternateImg: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80" },
+            { name: "Suede Forest Moss", hex: "#2E3B2E", primaryImg: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80", alternateImg: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80" },
+            { name: "Chalk Alabaster", hex: "#EAE6DF", primaryImg: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=600&q=80", alternateImg: "https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=600&q=80" }
+        ];
+
+        // Generation Engine: Populates the massive 100 item inventory space cleanly with explicit individual properties
+        const LOOKBOOK_DATABASE = Array.from({ length: 100 }, (_, index) => {
+            const idNumber = index + 1;
+            const category = CLOTHING_CATEGORIES[index % CLOTHING_CATEGORIES.length];
+            const name = `Concept Studio Piece No. ${100 + idNumber} (${category})`;
+            const price = 110 + (idNumber * 3.5);
+            
+            // Give every product item structural dynamic shade groupings
+            const colorsMap = {};
+            COLOR_PALETTES.forEach((palette, pIdx) => {
+                // Scramble images per color sequence slightly so everything looks naturally staggered & fully distinct
+                const shiftIndex = (index + pIdx) % COLOR_PALETTES.length;
+                const sourcePalette = COLOR_PALETTES[shiftIndex];
+                
+                colorsMap[palette.name] = {
+                    primary: sourcePalette.primaryImg,
+                    angles: [sourcePalette.primaryImg, sourcePalette.alternateImg],
+                    hex: palette.hex
+                };
+            });
+
+            return {
+                id: `elvt-prod-${idNumber}`,
+                name: name,
+                collection: idNumber % 3 === 0 ? "Atelier Unisex Drop" : (idNumber % 2 === 0 ? "Womens Premium Line" : "Mens Core Autumn"),
+                basePrice: price,
+                description: `This high-end garment is structurally configured with fluid heavy-weave composite threads. Intended for long-form geometric structural presence. Features signature hidden pocketing grids and tailored accent linings.`,
+                colors: colorsMap
+            };
+        });
+
+        let activeProduct = null;
+        let selectedColorName = "";
+        let selectedSizeSetting = "M";
+
+        // Initial Grid Draw Render Hook
+        document.addEventListener("DOMContentLoaded", () => {
+            const grid = document.getElementById("master-grid");
+            grid.innerHTML = LOOKBOOK_DATABASE.map(p => {
+                const firstColorKey = Object.keys(p.colors)[0];
+                const modelFrontCoverImage = p.colors[firstColorKey].primary;
+                return `
+                    <div onclick="openModal('${p.id}')" class="group cursor-pointer bg-white border border-stone-100 rounded-2xl p-4 shadow-sm flex flex-col justify-between transition duration-300 hover:shadow-md hover:border-stone-200">
+                        <div>
+                            <div class="w-full aspect-[3/4] rounded-xl bg-stone-50 overflow-hidden mb-4 relative border border-stone-100">
+                                <img src="${modelFrontCoverImage}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-stone-950/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <span class="bg-white/95 text-stone-900 text-[10px] tracking-widest font-mono font-bold px-4 py-2.5 rounded-xl uppercase shadow-md border">Inspect Look</span>
+                                </div>
+                            </div>
+                            <h2 class="text-xs font-semibold tracking-wider text-stone-800 uppercase truncate">${p.name}</h2>
+                            <p class="text-[9px] tracking-widest font-mono text-stone-400 uppercase mt-1">${p.collection}</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-stone-100 flex justify-between items-center">
+                            <span class="text-xs font-bold font-mono text-stone-900">€${p.basePrice.toFixed(2)}</span>
+                            <span class="text-[9px] text-stone-400 font-medium tracking-wide uppercase bg-stone-50 border px-2 py-0.5 rounded-md">Studio Matrix</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        });
+
+        // Overlay Modal Management Subroutines
+        function openModal(id) {
+            activeProduct = LOOKBOOK_DATABASE.find(p => p.id === id);
+            selectedColorName = Object.keys(activeProduct.colors)[0];
+            selectedSizeSetting = "M";
+            
+            document.getElementById("modal-title").innerText = activeProduct.name;
+            document.getElementById("modal-collection-tag").innerText = activeProduct.collection;
+            document.getElementById("modal-price").innerText = `€${activeProduct.basePrice.toFixed(2)}`;
+            document.getElementById("modal-desc").innerText = activeProduct.description;
+
+            renderColorOptions();
+            setStudioViewColor(selectedColorName);
+            setSize("M");
+
+            const modal = document.getElementById("product-modal");
+            modal.classList.remove("opacity-0", "pointer-events-none");
+            modal.firstElementChild.classList.remove("scale-95");
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("product-modal");
+            modal.classList.add("opacity-0", "pointer-events-none");
+            modal.firstElementChild.classList.add("scale-95");
+        }
+
+        function renderColorOptions() {
+            const container = document.getElementById("modal-color-swatches");
+            container.innerHTML = Object.keys(activeProduct.colors).map(colorKey => {
+                const colorData = activeProduct.colors[colorKey];
+                return `
+                    <button onclick="setStudioViewColor('${colorKey}')" 
+                        class="w-6 h-6 rounded-full border-2 transition transform hover:scale-110 active:scale-95 shadow-sm" 
+                        style="background-color: ${colorData.hex}; border-color: ${selectedColorName === colorKey ? '#1C1917' : '#E7E5E4'}">
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function setStudioViewColor(colorName) {
+            selectedColorName = colorName;
+            const targetColorway = activeProduct.colors[colorName];
+            
+            document.getElementById("modal-selected-color-label").innerText = `Active Studio Palette: ${colorName}`;
+            document.getElementById("modal-main-img").src = targetColorway.primary;
+
+            // Render out alternative multi-angle track sub-gallery
+            const track = document.getElementById("modal-gallery-track");
+            track.innerHTML = targetColorway.angles.map((url, index) => `
+                <button onclick="document.getElementById('modal-main-img').src='${url}'" class="w-14 h-18 rounded-xl overflow-hidden border bg-white flex-shrink-0 transition transform hover:scale-105 ${index === 0 ? 'border-stone-400':'border-stone-200'}">
+                    <img src="${url}" class="w-full h-full object-cover">
+                </button>
+            `).join('');
+
+            renderColorOptions();
+
+            // Re-bind click event to checkout pipeline
+            document.getElementById("modal-submit-btn").onclick = () => {
+                ELEVET_CART.add(
+                    activeProduct.id, 
+                    activeProduct.name, 
+                    activeProduct.basePrice, 
+                    targetColorway.primary, 
+                    selectedColorName, 
+                    selectedSizeSetting
+                );
+                closeModal();
+            };
+        }
+
+        function setSize(size) {
+            selectedSizeSetting = size;
+            ['S', 'M', 'L', 'XL'].forEach(s => {
+                const btn = document.getElementById(`size-${s}`);
+                if (s === size) {
+                    btn.className = "border py-2.5 rounded-xl uppercase text-xs font-mono transition bg-stone-950 text-white font-bold border-stone-950 shadow-sm";
+                } else {
+                    btn.className = "border py-2.5 rounded-xl uppercase text-xs font-mono transition bg-white text-stone-800 hover:border-stone-400";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

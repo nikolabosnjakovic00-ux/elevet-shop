@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEVET | Summer Clearance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>body { background-color: #FDFBF7; color: #1C1917; }</style>
+</head>
+<body>
+    <script>
+        const ELEVET_CART = {
+            get() { return JSON.parse(localStorage.getItem('elevet_cart')) || []; },
+            save(cart) { localStorage.setItem('elevet_cart', JSON.stringify(cart)); this.updateBadge(); },
+            add(id, name, price, img, color = "Standard") {
+                let cart = this.get();
+                let existing = cart.find(item => item.id === id && item.color === color);
+                if (existing) { existing.qty += 1; } else { cart.push({ id, name, price, img, color, qty: 1 }); }
+                this.save(cart);
+                alert(`${name} added.`);
+            },
+            updateBadge() {
+                const b = document.getElementById('cart-count');
+                if(b) { b.innerText = this.get().reduce((s,i)=>s+i.qty,0); b.style.display = b.innerText > 0 ? 'flex':'none'; }
+            }
+        };
+    </script>
+
+    <nav class="bg-white border-b border-stone-100 h-20 flex justify-between items-center px-6">
+        <a href="index.html" class="text-2xl font-light tracking-[0.3em] uppercase">ELE<span class="font-medium">VET</span></a>
+        <div class="space-x-8 text-xs uppercase tracking-widest">
+            <a href="collections.html" class="text-stone-500">Collections</a>
+            <a href="sale.html" class="text-rose-600 font-bold border-b border-rose-600">Summer Sale</a>
+            <a href="cart.html" class="text-stone-900"><i class="fa-solid fa-bag-shopping"></i> Bag (<span id="cart-count">0</span>)</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div id="sale-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </main>
+
+    <script src="products.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            ELEVET_CART.updateBadge();
+            const saleItems = ELEVET_PRODUCTS.filter(p => p.isSale);
+            document.getElementById("sale-grid").innerHTML = saleItems.map(p => `
+                <div class="bg-white border border-stone-100 rounded-2xl p-4 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <img src="${p.images[p.colors[0]]}" class="w-full aspect-[3/4] object-cover rounded-xl mb-3">
+                        <h2 class="text-xs font-bold uppercase truncate">${p.name}</h2>
+                    </div>
+                    <div class="mt-4 pt-2 border-t flex justify-between items-center">
+                        <div>
+                            <span class="text-xs font-bold text-rose-600">€${p.salePrice.toFixed(2)}</span>
+                            <span class="text-[10px] text-stone-300 line-through ml-1">€${p.price.toFixed(2)}</span>
+                        </div>
+                        <button onclick="ELEVET_CART.add('${p.id}', \`${p.name}\`, ${p.salePrice}, '${p.images[p.colors[0]]}')" class="bg-stone-900 text-white text-[10px] px-3 py-1.5 rounded-lg uppercase">Buy</button>
+                    </div>
+                </div>
+            `).join('');
+        });
+    </script>
+</body>
+</html>

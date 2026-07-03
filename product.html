@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEVET | 01 // Heavyweight Boxy Tee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>body { background-color: #FDFBF7; color: #1C1917; }</style>
+</head>
+<body>
+
+    <nav class="bg-white border-b border-stone-100 h-20 flex justify-between items-center px-6">
+        <a href="index.html" class="text-2xl font-light tracking-[0.3em] uppercase">ELE<span class="font-medium">VET</span></a>
+        <a href="cart.html" class="text-stone-700 hover:text-stone-950 text-sm tracking-widest uppercase font-semibold">Bag (1)</a>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-16">
+        
+        <div class="space-y-4">
+            <div class="bg-stone-100 aspect-[3/4] rounded-3xl overflow-hidden">
+                <img id="main-img" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="bg-stone-100 aspect-square rounded-xl overflow-hidden cursor-pointer" onclick="document.getElementById('main-img').src=this.children[0].src">
+                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-stone-100 aspect-square rounded-xl overflow-hidden cursor-pointer" onclick="document.getElementById('main-img').src=this.children[0].src">
+                    <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-stone-100 aspect-square rounded-xl overflow-hidden cursor-pointer" onclick="document.getElementById('main-img').src=this.children[0].src">
+                    <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col justify-center">
+            <span class="text-xs uppercase tracking-[0.2em] font-medium text-stone-400">Core Silhouette</span>
+            <h1 class="text-3xl font-light tracking-wide text-stone-900 mt-2 mb-4">01 // Heavyweight Boxy Tee</h1>
+            <p class="text-xl font-medium mb-8">€55.00</p>
+
+            <hr class="border-stone-200 mb-8">
+
+            <div class="mb-6">
+                <label class="block text-xs uppercase tracking-widest font-bold text-stone-600 mb-2">Your Initials / Branding Placement</label>
+                <input type="text" maxlength="12" placeholder="e.g., E L V T" class="w-full p-4 border border-stone-300 rounded-xl outline-none focus:border-stone-950 uppercase tracking-widest bg-white">
+                <p class="text-[11px] text-stone-400 mt-1">High-density custom precision printed placement on left breast profile.</p>
+            </div>
+
+            <div class="mb-8">
+                <label class="block text-xs uppercase tracking-widest font-bold text-stone-600 mb-2">Select Premium Pastel Base</label>
+                <div class="flex space-x-3">
+                    <button class="w-8 h-8 rounded-full bg-[#E2D4C9] border-2 border-stone-950 focus:outline-none"></button>
+                    <button class="w-8 h-8 rounded-full bg-[#C3CFD2] border border-transparent hover:border-stone-300"></button>
+                    <button class="w-8 h-8 rounded-full bg-[#F5F5F4] border border-transparent hover:border-stone-300"></button>
+                </div>
+            </div>
+
+            <a href="cart.html" class="bg-stone-900 text-white text-center text-xs tracking-widest uppercase py-4 rounded-xl font-bold shadow-md hover:bg-stone-800 transition">Add Custom garment to Bag</a>
+        </div>
+    </main>
+
+</body>
+</html>

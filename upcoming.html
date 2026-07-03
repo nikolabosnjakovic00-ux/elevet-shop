@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEVET | Future Drops</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>body { background-color: #FDFBF7; color: #1C1917; }</style>
+</head>
+<body>
+    <nav class="bg-white border-b border-stone-100 h-20 flex justify-between items-center px-6">
+        <a href="index.html" class="text-2xl font-light tracking-[0.3em] uppercase">ELE<span class="font-medium">VET</span></a>
+        <div class="space-x-8 text-xs uppercase tracking-widest">
+            <a href="collections.html" class="text-stone-500">Collections</a>
+            <a href="sale.html" class="text-rose-600 font-semibold">Summer Sale</a>
+            <a href="upcoming.html" class="font-bold border-b border-stone-900">Upcoming</a>
+            <a href="personalize.html" class="text-stone-500">Personalize</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div class="border-b pb-4 mb-8">
+            <h1 class="text-xl font-light tracking-widest uppercase">Upcoming Release Schedules</h1>
+            <p class="text-xs text-stone-400 mt-1">Preview designs inside structural validation pipelines. Commercial operations locked until release timer expiration.</p>
+        </div>
+
+        <div id="upcoming-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </main>
+
+    <script src="products.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const upcoming = ELEVET_PRODUCTS.filter(p => p.isUpcoming);
+            document.getElementById("upcoming-grid").innerHTML = upcoming.map(p => `
+                <div class="bg-white border border-stone-200/60 rounded-3xl p-6 relative overflow-hidden opacity-90">
+                    <div class="absolute top-4 right-4 bg-stone-900 text-white font-mono text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Locked Blueprint</div>
+                    <img src="${p.images[Object.keys(p.images)[0]]}" class="w-full aspect-video object-cover rounded-2xl mb-4 filter grayscale">
+                    <h2 class="text-xs font-bold tracking-wide text-stone-900 uppercase">${p.name}</h2>
+                    <p class="text-[11px] text-stone-500 mt-2 font-light leading-relaxed">${p.description}</p>
+                    <div class="mt-6 pt-4 border-t flex justify-between items-center">
+                        <span class="text-xs font-mono text-stone-400">Target Drop: Winter 2026</span>
+                        <button onclick="alert('Notification tracked successfully.')" class="text-[9px] uppercase tracking-widest font-bold border border-stone-900 px-3 py-1.5 rounded-lg hover:bg-stone-950 hover:text-white transition">Notify Me</button>
+                    </div>
+                </div>
+            `).join('');
+        });
+    </script>
+</body>
+</html>
